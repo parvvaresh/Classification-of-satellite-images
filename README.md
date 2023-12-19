@@ -65,7 +65,3 @@ The notebook builds and evaluates three machine learning models:
 
 ### 6. Model Comparison and Visualization
 Finally, the notebook compares the accuracy of the three models and visualizes the results using a bar plot.
-
----
-
-This summary provides an overview of the notebook's content, highlighting the key steps and tasks performed.
