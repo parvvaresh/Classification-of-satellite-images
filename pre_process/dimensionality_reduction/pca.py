@@ -22,17 +22,6 @@ def pca_split(X_s1 : np.array,
   return X
 
 
-
-
-
-
-
-
-
-
-
-
-
 def get_best_n_components(X : np.array) -> int:
 
   pca = PCA().fit(X)
