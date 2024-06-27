@@ -8,7 +8,7 @@ from sklearn.preprocessing import (
 
 
 
-def x(X : np.array) -> list:
+def standardize(X : np.array) -> list:
   scaler_standard = StandardScaler()
   X_standard_scaled = scaler_standard.fit_transform(X)
 
