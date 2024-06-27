@@ -31,11 +31,13 @@ def classification_parameter_finder(model,
                                     y_test : np.array):
     start = time.time()
 
-    # Create a scorer based on Cohen's kappa
     kappa_scorer = make_scorer(cohen_kappa_score)
 
-    # Set GridSearchCV to optimize for kappa
-    grid = GridSearchCV(model, param_grid=parameters, refit=True, cv=5, n_jobs=-1, scoring=kappa_scorer)
+    grid = GridSearchCV(model,
+                        param_grid=parameters,
+                        refit=True,
+                        cv=5, n_jobs=-1,
+                        scoring=kappa_scorer)
     grid.fit(X_train, y_train)
 
     y_train_pred = grid.predict(X_train)
@@ -66,22 +68,8 @@ def classification_parameter_finder(model,
         "f1_score": [f1],
         "kappa": [kappa],
         "confusion_matrix": [conf_matrix.ravel()],
-        "runtime": [end - start]
+        "runtime": [end - start],
+        "best model" : [grid.best_estimator_]
     })
 
-    name = f"{model_name}.csv"
-    results.to_csv(name)
-
-    print(f"The best parameters for {model_name} model is: {grid.best_params_}")
-    print("--" * 10)
-    print(f"Accuracy in the training set is {train_accuracy:0.2%} for {model_name} model.")
-    print(f"Accuracy in the testing set is {test_accuracy:0.2%} for {model_name} model.")
-    print(f"Precision is {precision:0.2%} for {model_name} model.")
-    print(f"Recall is {recall:0.2%} for {model_name} model.")
-    print(f"F1 Score is {f1:0.2%} for {model_name} model.")
-    print(f"Kappa Score is {kappa:0.2%} for {model_name} model.")
-    print("--" * 10)
-    print(f"Runtime of the program is: {end - start:0.2f} seconds")
-
-    # Plot the confusion matrix
-    #plot_confusion_matrix(conf_matrix, class_labels, model_name)
+    return results
