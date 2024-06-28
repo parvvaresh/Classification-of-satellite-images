@@ -34,6 +34,9 @@ def get_best_n_components(X : np.array) -> int:
 def pca(X : np.array,
         n_components_best : int) -> np.array:
 
+  if isinstance(n_components_best, type(None)):
+    best_n_components = get_best_n_components(X)
+
   pca = PCA(n_components=n_components_best,
             svd_solver='auto')
 

@@ -21,6 +21,7 @@ def lda_split(X_s1 : np.array,
   return X
 
 
+
 def get_best_n_components(X : np.array,
                           y : np.array) -> int:
   lda = LinearDiscriminantAnalysis()
@@ -39,6 +40,10 @@ def get_best_n_components(X : np.array,
 def lda(X : np.array,
         y : np.array,
         n_components_best : int) -> np.array:
+
+  if isinstance(n_components_best, type(None)):
+    best_n_components = get_best_n_components(X, y)
+
 
   lda = LinearDiscriminantAnalysis(n_components=n_components_best,
             svd_solver='auto')
