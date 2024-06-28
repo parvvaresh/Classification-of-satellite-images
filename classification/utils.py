@@ -38,7 +38,8 @@ def _standardize_data(data  : dict) -> dict:
 
 
 
-def _dimensionality_reduction(data, y):
+def _dimensionality_reduction(data : dict,
+                              y : dict) -> dict:
   result = {}
 
   for  name, _data_dict in data.items():
