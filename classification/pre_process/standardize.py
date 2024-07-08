@@ -39,9 +39,11 @@ def standardize(df : pd.array) -> list:
   X_normalized = scaler_normalizer.fit_transform(df)
   df_normalized = pd.DataFrame(X_normalized, columns=columns)
 
-  return [
-          df_standard_scaled,
-          df_minmax_scaled,
-          df_maxabs_scaled,
-          df_robust_scaled,
-          df_normalized]
+  return {
+        "orginal" : df,
+        "standard_scaled" : df_standard_scaled,
+        "minmax_scaled" : df_minmax_scaled,
+        "maxabs_scaled" : df_maxabs_scaled,
+        "robust_scaled" : df_robust_scaled,
+        "normalized" : df_normalized
+      }
