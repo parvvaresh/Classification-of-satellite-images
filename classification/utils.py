@@ -19,9 +19,8 @@ def split_data(df: pd.DataFrame) -> list:
 
     return [
             np.array(s1),
-            np.array(s2)
-        ]
-
+            np.array(s2),
+    ]
 def extract_spectrum(column: str) -> str:
     spectrum = ""
 
