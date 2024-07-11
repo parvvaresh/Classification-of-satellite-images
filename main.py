@@ -45,6 +45,8 @@ def main(df : pd.DataFrame,
         data[name] = temp
 
 
+    results = []
+
     for  name_section, data_section in data.items():
         for name_subsection , data_subsection in data_section.items():
             method = f"name_section-name_subsection"
@@ -61,9 +63,12 @@ def main(df : pd.DataFrame,
                                                 X_test,
                                                 y_test,
                                                 method)
-                print(_result)
+                results.append(_result)
 
 
+    results = pd.concat(results, ignore_index=True)
+
+    results.to_csv("result.csv")
 
 
 
