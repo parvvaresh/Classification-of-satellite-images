@@ -92,7 +92,3 @@ def main(df : pd.DataFrame,
 
 
 
-df = pd.read_csv("/home/reza/Documents/sample.csv")
-
-
-main(df, "class")
