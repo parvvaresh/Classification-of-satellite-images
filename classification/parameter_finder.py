@@ -28,7 +28,8 @@ def classification_parameter_finder(model,
                                     X_train : np.array,
                                     y_train : np.array,
                                     X_test : np.array,
-                                    y_test : np.array):
+                                    y_test : np.array,
+                                    method):
     start = time.time()
 
     kappa_scorer = make_scorer(cohen_kappa_score)
@@ -36,7 +37,8 @@ def classification_parameter_finder(model,
     grid = GridSearchCV(model,
                         param_grid=parameters,
                         refit=True,
-                        cv=5, n_jobs=-1,
+                        cv=5, 
+                        n_jobs=-1,
                         scoring=kappa_scorer)
     grid.fit(X_train, y_train)
 
@@ -59,6 +61,7 @@ def classification_parameter_finder(model,
     end = time.time()
 
     results = pd.DataFrame({
+        "method" : [method],
         "model": [model_name],
         "best_params": [grid.best_params_],
         "train_accuracy": [train_accuracy],
