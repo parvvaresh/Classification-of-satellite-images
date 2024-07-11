@@ -1,3 +1,8 @@
+import warnings
+
+# Suppress all warnings
+warnings.filterwarnings("ignore")
+
 from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import (
     recall_score,

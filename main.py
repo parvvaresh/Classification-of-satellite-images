@@ -2,6 +2,11 @@ import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
+import warnings
+warnings.filterwarnings('ignore')
+
+
+
 from classification.parameter_finder import classification_parameter_finder
 from classification.models.models import get_details_models
 from classification.pre_process.standardize import standardize
@@ -19,10 +24,17 @@ def main(df : pd.DataFrame,
 
     # pre process 1-> standardize data
 
+    
 
+    print("start standardize")
     standardize_data = standardize(X)
+    print("finish standardize")
 
     # pre process 2 -> apply pca and lda
+
+
+
+    print("start dimensionality reduction")
 
     data = {}
     for name , _data in standardize_data.items():
@@ -44,8 +56,12 @@ def main(df : pd.DataFrame,
 
         data[name] = temp
 
+    print("finish dimensionality reduction")
 
     results = []
+
+
+    print("start train model ...")
 
     for  name_section, data_section in data.items():
         for name_subsection , data_subsection in data_section.items():
@@ -55,7 +71,7 @@ def main(df : pd.DataFrame,
             for detail_model in details_models:
                 model, parameters = detail_model
 
-
+                print(f"---> start train {model} on {method} data")
                 _result = classification_parameter_finder(model,
                                                 parameters,
                                                 X_train,
@@ -63,12 +79,15 @@ def main(df : pd.DataFrame,
                                                 X_test,
                                                 y_test,
                                                 method)
+                print(f"---> finish train {model} on {method} data")
                 results.append(_result)
 
+    print("finish train model")
 
     results = pd.concat(results, ignore_index=True)
 
     results.to_csv("result.csv")
+    print("save result in local path ...")
 
 
 
