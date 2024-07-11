@@ -45,8 +45,7 @@ def lda(X : np.array,
     best_n_components = get_best_n_components(X, y)
 
 
-  lda = LinearDiscriminantAnalysis(n_components=n_components_best,
-            svd_solver='auto')
+  lda = LinearDiscriminantAnalysis(n_components=n_components_best)
 
 
 

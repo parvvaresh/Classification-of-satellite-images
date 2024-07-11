@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from pre_process.data.parser import get_spectrums
+from .pre_process.data.parser import get_spectrums
 
 def split_data(df: pd.DataFrame) -> list:
     s1_columns = []

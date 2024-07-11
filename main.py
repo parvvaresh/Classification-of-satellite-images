@@ -14,7 +14,7 @@ def main(df : pd.DataFrame,
          class_column : str) -> None:
     
 
-    X , y  = df , df[class_column]
+    X , y  = df.drop(class_column, axis=1) , df[class_column]
     details_models = get_details_models()
 
     # pre process 1-> standardize data
@@ -29,8 +29,8 @@ def main(df : pd.DataFrame,
         s1 , s2 =  split_data(_data)
 
         data_pca =  pca(_data, None)
-        data_lda = lda(_data, None)
-        split_pca = pca_split(s1, s2, y)
+        data_lda = lda(_data, y,  None)
+        split_pca = pca_split(s1, s2)
         split_lda = lda_split(s1, s2, y)
 
         temp = {
@@ -49,7 +49,7 @@ def main(df : pd.DataFrame,
 
     for  name_section, data_section in data.items():
         for name_subsection , data_subsection in data_section.items():
-            method = f"name_section-name_subsection"
+            method = f"{name_section}-{name_subsection}"
             X_train, X_test, y_train, y_test = train_test_split(data_subsection, y, test_size=0.2, random_state=42)
 
             for detail_model in details_models:
@@ -73,4 +73,7 @@ def main(df : pd.DataFrame,
 
 
 
+df = pd.read_csv("/home/reza/Documents/sample.csv")
 
+
+main(df, "class")
