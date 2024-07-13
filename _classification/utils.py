@@ -10,10 +10,10 @@ def split_data(df: pd.DataFrame) -> list:
 
 
     for column in df.columns:
-        if  check_s1(column):
+        if  check_s1_and_s2(column, data["s1"]):
             s1_columns.append(column)
 
-        elif  check_s2(column):
+        elif  check_s1_and_s2(column, data["s2"]):
             s2_columns.append(column)
 
     s1 = pd.concat([df[col] for col in s1_columns], axis=1)
@@ -25,21 +25,15 @@ def split_data(df: pd.DataFrame) -> list:
     ]
 
 
-def check_s1(column):
-    data = get_spectrums()
-    for s1_column in data["s1"]:
-        if s1_column in column.upper():
+def check_s1_and_s2(column  , data):
+    for _column in data:
+        if _column in column.upper():
             return True
     return False
 
 
 
-def check_s2(column):
-    data = get_spectrums()
-    for s2_column in data["s2"]:
-        if s2_column in column.upper():
-            return True
-    return False
+
 
 
 # not work for S1 and S2
