@@ -8,10 +8,12 @@ def split_data(df: pd.DataFrame) -> list:
 
     data = get_spectrums()
 
+
     for column in df.columns:
-        if extract_spectrum(column).upper() in data["s1"]:
+        if  check_s1(column):
             s1_columns.append(column)
-        elif extract_spectrum(column).upper() in data["s2"]:
+
+        elif  check_s2(column):
             s2_columns.append(column)
 
     s1 = pd.concat([df[col] for col in s1_columns], axis=1)
@@ -21,12 +23,32 @@ def split_data(df: pd.DataFrame) -> list:
             np.array(s1),
             np.array(s2),
     ]
-def extract_spectrum(column: str) -> str:
-    spectrum = ""
 
-    try:
-        _, spectrum = column.split("_")
-    except ValueError:
-        return spectrum
 
-    return spectrum
+def check_s1(column):
+    data = get_spectrums()
+    for s1_column in data["s1"]:
+        if s1_column in column.upper():
+            return True
+    return False
+
+
+
+def check_s2(column):
+    data = get_spectrums()
+    for s2_column in data["s2"]:
+        if s2_column in column.upper():
+            return True
+    return False
+
+
+# not work for S1
+# def extract_spectrum(column: str) -> str:
+#     spectrum = ""
+
+#     try:
+#         _, spectrum = column.split("_")
+#     except ValueError:
+#         return spectrum
+
+#     return spectrum
