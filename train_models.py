@@ -48,4 +48,4 @@ def train_models(x_data : dict,
 
     results.to_csv("result.csv")
 
-    print("             ✅save result in local path ✅              ")
+    print("             ✅save result in local path✅              ")
