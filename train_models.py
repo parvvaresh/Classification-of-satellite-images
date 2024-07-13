@@ -5,7 +5,10 @@ from _classification.parameter_finder import classification_parameter_finder
 from _classification.models.models import get_details_models
 
 import warnings
-warnings.filterwarnings('ignore')
+from sklearn.exceptions import ConvergenceWarning
+
+# Ignore ConvergenceWarning
+warnings.filterwarnings("ignore", category = ConvergenceWarning)
 
 
 def train_models(x_data : dict,
@@ -45,4 +48,4 @@ def train_models(x_data : dict,
 
     results.to_csv("result.csv")
 
-    print("             ✅save result in local path ...")
+    print("             ✅save result in local path ✅              ")
