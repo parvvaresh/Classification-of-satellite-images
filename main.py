@@ -1,4 +1,3 @@
-import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
@@ -9,54 +8,13 @@ warnings.filterwarnings('ignore')
 
 from classification.parameter_finder import classification_parameter_finder
 from classification.models.models import get_details_models
-from classification.pre_process.standardize import standardize
-from classification.utils import split_data
-from classification.pre_process.dimensionality_reduction.lda import lda_split, lda
-from classification.pre_process.dimensionality_reduction.pca import pca_split, pca
+from .pre_process import pre_process
 
 
 def main(df : pd.DataFrame,
          class_column : str) -> None:
     
-
-    X , y  = df.drop(class_column, axis=1) , df[class_column]
-    details_models = get_details_models()
-
-    # pre process 1-> standardize data
-
-    
-
-    print("start standardize")
-    standardize_data = standardize(X)
-    print("finish standardize")
-
-    # pre process 2 -> apply pca and lda
-
-
-
-    print("start dimensionality reduction")
-
-    data = {}
-    for name , _data in standardize_data.items():
-        s1 , s2 =  split_data(_data)
-
-        data_pca =  pca(_data, None)
-        data_lda = lda(_data, y,  None)
-        split_pca = pca_split(s1, s2)
-        split_lda = lda_split(s1, s2, y)
-
-        temp = {
-            "original" : _data,
-            "pca" : data_pca,
-            "lda" : data_lda,
-            "split pca" : split_pca,
-            "split lda" : split_lda
-
-        }
-
-        data[name] = temp
-
-    print("finish dimensionality reduction")
+    data , y = pre_process(df, class_column)
 
     results = []
 

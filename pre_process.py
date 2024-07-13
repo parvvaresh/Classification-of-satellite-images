@@ -8,7 +8,7 @@ from classification.pre_process.dimensionality_reduction.pca import pca_split, p
 
 
 def pre_process(df : pd.DataFrame,
-                class_column : str) -> dict:
+                class_column : str) -> list:
     
 
 
@@ -29,7 +29,7 @@ def pre_process(df : pd.DataFrame,
 
     print("--- 📌start dimensionality reduction")
 
-    data = {}
+    x_data = {}
     for name , _data in standardize_data.items():
         s1 , s2 =  split_data(_data)
 
@@ -47,11 +47,11 @@ def pre_process(df : pd.DataFrame,
 
         }
 
-        data[name] = temp
+        x_data[name] = temp
 
     print("--- ✅finish dimensionality reduction")
 
     print("✅finish pre process ...")
 
 
-    return data
+    return x_data , y
