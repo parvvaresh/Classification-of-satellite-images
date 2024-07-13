@@ -1,8 +1,8 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
-from classification.parameter_finder import classification_parameter_finder
-from classification.models.models import get_details_models
+from _classification.parameter_finder import classification_parameter_finder
+from _classification.models.models import get_details_models
 
 import warnings
 warnings.filterwarnings('ignore')

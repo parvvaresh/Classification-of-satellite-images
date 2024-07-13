@@ -1,9 +1,9 @@
 import pandas as pd
 
-from classification.pre_process.standardize import standardize
-from classification.utils import split_data
-from classification.pre_process.dimensionality_reduction.lda import lda_split, lda
-from classification.pre_process.dimensionality_reduction.pca import pca_split, pca
+from _classification.pre_process.standardize import standardize
+from _classification.utils import split_data
+from _classification.pre_process.dimensionality_reduction.lda import lda_split, lda
+from _classification.pre_process.dimensionality_reduction.pca import pca_split, pca
 
 
 
