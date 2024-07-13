@@ -42,7 +42,7 @@ def check_s2(column):
     return False
 
 
-# not work for S1
+# not work for S1 and S2
 # def extract_spectrum(column: str) -> str:
 #     spectrum = ""
 
