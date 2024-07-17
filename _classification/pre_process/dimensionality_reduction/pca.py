@@ -13,10 +13,10 @@ def pca_split(X_s1 : np.array,
   best_n_components_s2 = get_best_n_components(X_s2)
 
 
-  best_n_components = min(best_n_components_s1, best_n_components_s2)
+  #best_n_components = min(best_n_components_s1, best_n_components_s2)
 
-  X_pca_s1 = pca(X_s1, best_n_components)
-  X_pca_s2 = pca(X_s2, best_n_components)
+  X_pca_s1 = pca(X_s1, best_n_components_s1)
+  X_pca_s2 = pca(X_s2, best_n_components_s2)
 
   X = np.hstack((X_pca_s1, X_pca_s1))
   return X

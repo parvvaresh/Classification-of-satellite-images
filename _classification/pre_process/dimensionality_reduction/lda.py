@@ -12,10 +12,10 @@ def lda_split(X_s1 : np.array,
   best_n_components_s2 = get_best_n_components(X_s2, y)
 
 
-  best_n_components = min(best_n_components_s1, best_n_components_s2)
+  #best_n_components = min(best_n_components_s1, best_n_components_s2)
 
-  X_lda_s1 = lda(X_s1, y , best_n_components)
-  X_lda_s2 = lda(X_s2, y,  best_n_components)
+  X_lda_s1 = lda(X_s1, y , best_n_components_s1)
+  X_lda_s2 = lda(X_s2, y,  best_n_components_s2)
 
   X = np.hstack((X_lda_s1, X_lda_s2))
   return X
