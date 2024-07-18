@@ -6,10 +6,11 @@ from .naive_bayes import get_nb
 from .perceptron import get_pr
 from .random_forest import get_rf
 from .svm import get_svm
-
+from .NearestCentroid import get_nc
 
 def get_details_models():
     return [
+        get_nc(),
         get_knn(),
         get_dt(),
         get_lr(),
