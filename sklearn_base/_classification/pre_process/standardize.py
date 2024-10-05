@@ -8,7 +8,7 @@ from sklearn.preprocessing import (
 
 
 
-def standardize(df : pd.array) -> list:
+def standardize(df : pd.DataFrame) -> list:
 
 
   columns = df.columns
