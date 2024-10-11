@@ -11,3 +11,8 @@ def classification(df : pd.DataFrame,
     train_models(x_data, y)
 
 
+
+
+path = "" # add this
+df = pd.read_csv(path)
+classification(df , "lable_column")
