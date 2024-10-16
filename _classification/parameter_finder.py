@@ -13,22 +13,14 @@ from sklearn.metrics import (
 import numpy as np
 import pandas as pd
 import time
-from sklearnex import config_context  # Import config_context for GPU offloading
-import dpctl  # Import DPCTL to manage devices
+from sklearnex import config_context  
+from sklearnex import patch_sklearn
+patch_sklearn()
 
 # Suppress all warnings
 warnings.filterwarnings("ignore")
 
-def get_best_device():
-    """Automatically selects the best device (GPU or CPU) for computation."""
-    devices = dpctl.get_devices()  # Get the list of available devices
-    # Check for GPU
-    for device in devices:
-        if 'gpu' in str(device):
-            print(f"Using GPU: {device}")
-            return "gpu:0"  # Select the first available GPU
-    print("No GPU found. Falling back to CPU.")
-    return "cpu"  # Fallback to CPU if no GPU is found
+
 
 def classification_parameter_finder(model,
                                     parameters: dict,
@@ -41,9 +33,8 @@ def classification_parameter_finder(model,
 
     kappa_scorer = make_scorer(cohen_kappa_score)
 
-    best_device = get_best_device()  # Automatically select the best device
 
-    with config_context(target_offload=best_device):  # Use the selected device
+    with config_context(target_offload="gpu:0"):  # Use the selected device
         grid = GridSearchCV(model,
                             param_grid=parameters,
                             refit=True,
