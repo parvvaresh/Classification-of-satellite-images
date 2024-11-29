@@ -1,7 +1,3 @@
-Here’s a refined version of the README file to ensure clarity and proper structure:
-
----
-
 # Agricultural Products Classification Pipeline
 
 ## Overview
