@@ -66,6 +66,12 @@ def classification_parameter_finder(model,
             It also includes the file path of the saved confusion matrix image.
     """
 
+
+    if not os.path.exists(path):
+        os.makedirs(path)
+        print(f"Created directory: {path}")
+
+    
     model_name = str(model).split('(')[0]
 
     start = time.time()
@@ -96,7 +102,7 @@ def classification_parameter_finder(model,
     class_labels = np.unique(y_test)
 
     # Save confusion matrix as an image
-    conf_matrix_path = os.path.join(path, f"{model}_{method}_confusion_matrix.png")
+    conf_matrix_path = os.path.join(path, f"{model_name}_{method}_confusion_matrix.png")
     plt.figure(figsize=(10, 8))
     sns.heatmap(conf_matrix, annot=True, fmt=".2f", cmap="Blues", xticklabels=class_labels, yticklabels=class_labels)
     plt.title(f"Confusion Matrix - {method}")
