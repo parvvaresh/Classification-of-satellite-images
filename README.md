@@ -1,11 +1,15 @@
+Here’s a refined version of the README file to ensure clarity and proper structure:
+
+---
+
 # Agricultural Products Classification Pipeline
 
 ## Overview
-This pipeline is designed to classify agricultural products using satellite data from two satellites, **SENTINEL-1** and **SENTINEL-2**. The pipeline consists of several stages, including:
+This pipeline is designed to classify agricultural products using satellite data from **SENTINEL-1** and **SENTINEL-2**. The pipeline includes the following stages:
 
-1. **Data Standardization**: Various standardization techniques are applied to the data.
-2. **Dimensionality Reduction**: PCA and LDA are used for reducing the dimensionality of the feature space, with separate models applied for each satellite's data.
-3. **Model Training and Hyperparameter Optimization**: Different machine learning models are trained and their hyperparameters are tuned using grid search.
+1. **Data Standardization**: Different standardization techniques are applied to the data to make it suitable for model training.
+2. **Dimensionality Reduction**: PCA and LDA are applied to reduce the dimensionality of the feature space, with separate models for each satellite's data.
+3. **Model Training and Hyperparameter Optimization**: Various machine learning models are trained, and hyperparameter optimization is performed using grid search.
 
 ## Pipeline Steps
 
@@ -14,18 +18,18 @@ The following standardization methods are applied to the data:
 
 - **Original**: Raw data without scaling.
 - **Standard Scaled**: Standardization using mean and variance.
-- **MinMax Scaled**: Scaling data to a specific range (usually [0,1]).
+- **MinMax Scaled**: Scales data to a specified range (usually [0,1]).
 - **MaxAbs Scaled**: Scales data to [-1, 1] based on the maximum absolute value.
-- **Robust Scaled**: Scales using the median and interquartile range.
+- **Robust Scaled**: Scales data using the median and interquartile range.
 - **Normalized**: Scales data to unit norm.
 
 ### 2. Dimensionality Reduction
 Two dimensionality reduction techniques are used:
 
-- **PCA (Principal Component Analysis)**: Applied to reduce the feature space.
-- **LDA (Linear Discriminant Analysis)**: Used for classification-specific dimensionality reduction.
+- **PCA (Principal Component Analysis)**: Reduces the feature space by projecting the data into a lower-dimensional space.
+- **LDA (Linear Discriminant Analysis)**: A classification-specific dimensionality reduction technique.
 
-Note: Each satellite's data is processed separately as their band spaces differ. For **SENTINEL-1**, the bands are:
+Note: Each satellite’s data is processed separately due to different band spaces. For **SENTINEL-1**, the bands are:
 - `VH`, `VV`, `HH`, `VH_1`, `VV_1`
 
 For **SENTINEL-2**, the bands are:
@@ -44,7 +48,7 @@ The following models are trained using grid search for hyperparameter optimizati
 8. **Random Forest**
 9. **Support Vector Machine (SVM)**
 
-Each model has its respective hyperparameter grid to optimize.
+Each model is optimized based on its hyperparameter grid.
 
 ---
 
@@ -72,18 +76,46 @@ Each model has its respective hyperparameter grid to optimize.
 - numpy
 - matplotlib (for plotting and visualization)
 
+Here’s the updated **Setup** section with the commands:
+
+---
+
 ## Setup
 
-1. Clone the repository.
-2. Install the dependencies using `pip install -r requirements.txt`.
-3. Run the scripts in the following order:
-   - Data preprocessing (standardization and dimensionality reduction).
-   - Model training and hyperparameter tuning.
+1. **Clone the repository:**
+
+    ```bash
+    git clone https://github.com/parvvaresh/Classification-of-satellite-images.git
+    cd your-repository-name
+    ```
+
+2. **Install dependencies:**
+
+    First, create a virtual environment (optional but recommended):
+
+    ```bash
+    python -m venv venv
+    source venv/bin/activate  # On Windows: venv\Scripts\activate
+    ```
+
+    Then, install the required Python libraries:
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+
+
+
 
 ## Usage
 
-- The pipeline is designed to handle satellite data, perform preprocessing, apply dimensionality reduction techniques, and train various models with optimized hyperparameters.
-- Modify the input data or parameters in the respective scripts to fit your specific agricultural classification problem.
+The pipeline is designed to handle satellite data, perform preprocessing, apply dimensionality reduction techniques, and train various models with optimized hyperparameters.
+
+To use the pipeline, follow the steps below:
+
+1. Prepare your input data as a CSV file with the necessary features and target column.
+2. Modify the input data and parameters in the respective scripts to suit your specific agricultural classification problem.
 
 ---
 
@@ -119,11 +151,32 @@ path_csv = "/data.csv"  # Path to your dataset
 df = pd.read_csv(path_csv)  # Read the CSV into a DataFrame
 
 # Call the classification function
-classification(df, "Name", "/home/reza/data_test", "data_test")
+classification(df, "ClassColumn", "/home/reza/data_test", "data_test")
 ```
 
 ### Explanation:
-- `pre_process(df, class_column)` processes the data and splits it into features (`x_data`) and target variable (`y`).
-- `train_models(x_data, y, path, name)` trains machine learning models on the processed data and saves the trained models to the specified path (`path`) using the provided name (`name`).
-  
-Modify the `path_csv`, `class_column`, and output paths to match your specific setup. This code serves as a template for running the pipeline with your own dataset.
+- `pre_process(df, class_column)` processes the data, separating the features (`x_data`) and target variable (`y`).
+- `train_models(x_data, y, path, name)` trains machine learning models and saves the trained models to the specified path (`path`) using the provided name (`name`).
+
+### Output:
+After training, the results will be saved into a CSV file containing the following information:
+- **Method**: The data standardization and dimensionality reduction method used.
+- **Model name**: The name of the model.
+- **Best hyperparameters**: The best hyperparameters found during grid search.
+- **Train accuracy**: Accuracy on the training dataset.
+- **Test accuracy**: Accuracy on the test dataset.
+- **Precision**, **Recall**, **F1 Score**, **Kappa**: Metrics for model evaluation.
+- **Confusion Matrix path**: Path to the confusion matrix plot.
+- **Runtime**: The time taken to train the model.
+- **Best model**: The best model with its parameters.
+
+---
+
+### Sample Result Entry:
+
+| method              | model                  | best_params                                                                                       | train_accuracy | test_accuracy | precision | recall | f1_score | kappa | confusion_matrix_path | runtime | best_model                                   |
+|---------------------|------------------------|--------------------------------------------------------------------------------------------------|----------------|----------------|-----------|--------|----------|-------|------------------------|---------|----------------------------------------------|
+| original-original   | KNeighborsClassifier    | `{'metric': 'euclidean', 'n_neighbors': 1, 'weights': 'uniform'}`                                | 1.0            | 0.925          | 0.909     | 0.925  | 0.913    | 0.903 | path_to_matrix.png      | 2.43    | KNeighborsClassifier(metric='euclidean', n_neighbors=1) |
+
+---
+
