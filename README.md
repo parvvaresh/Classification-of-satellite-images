@@ -11,6 +11,40 @@ This pipeline is designed to classify agricultural products using satellite data
 2. **Dimensionality Reduction**: PCA and LDA are applied to reduce the dimensionality of the feature space, with separate models for each satellite's data.
 3. **Model Training and Hyperparameter Optimization**: Various machine learning models are trained, and hyperparameter optimization is performed using grid search.
 
+
+I've added the information you provided to the README. Here's the updated section that includes the satellite data input:
+
+---
+
+### Satellite Data Input:
+
+The input dataset contains Earth observation data from **SENTINEL-1** and **SENTINEL-2** satellites, obtained via Google Earth Engine. The data includes various bands from both satellites, as well as additional values relevant for classification tasks.
+
+#### Example of input data:
+
+| **Sample** | **0_B1**  | **0_B2**  | **0_B3**  | **0_B4**  | **0_B5**  | **0_B6**  | **0_B7**  | **0_B8**  | **0_B8A** | **0_B9**  | **0_B11** | **0_B12** | **0_VV** |
+|------------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|----------|
+| **Sample 1** | 0.050643478 | 0.071909783 | 0.108879348 | 0.140969565 | 0.156472826 | 0.172709783 | 0.185292391 | 0.180054348 | 0.195056522 | 0.205251087 | 0.195241304 | 0.1603 | -1 |
+| **Sample 2** | 0.051273684 | 0.07195 | 0.107911842 | 0.138413158 | 0.156592105 | 0.180571053 | 0.195072368 | 0.189626316 | 0.204071053 | 0.243975 | 0.199786842 | 0.161619737 | -1 |
+| **Sample 3** | 0.064336805 | 0.097296528 | 0.140022222 | 0.176558333 | 0.187975 | 0.19215 | 0.199796528 | 0.203748611 | 0.201070833 | 0.235688194 | 0.202470833 | -15.741307 | -1 |
+| **Sample 4** | 0.070949999 | 0.100846154 | 0.150261539 | 0.196115385 | 0.214473077 | 0.219430769 | 0.227103846 | 0.226692308 | 0.230776923 | 0.23485 | 0.240280769 | 0.209653846 | -1 |
+| **Sample 5** | 0.071380468 | 0.101917188 | 0.151620313 | 0.198378125 | 0.213576563 | 0.215678125 | 0.222285156 | 0.224170313 | 0.224170313 | 0.235323438 | 0.235323438 | 0.208569531 | -1 |
+| **Sample 6** | 0.072846154 | 0.100773077 | 0.150984615 | 0.198823077 | 0.213915385 | 0.217265385 | 0.224673077 | 0.226946154 | 0.226946154 | 0.234361538 | 0.237073077 | 0.206880769 | -1 |
+| **Sample 7** | 0.067707143 | 0.103935714 | 0.152242857 | 0.200014286 | 0.209557143 | 0.213071429 | 0.221978571 | 0.229471429 | 0.223307143 | 0.232307143 | 0.232307143 | 0.205528571 | -1 |
+| **Sample 8** | 0.097139552 | 0.130318657 | 0.162661194 | 0.194323881 | 0.209510448 | 0.212884328 | 0.222468657 | 0.230838806 | 0.230782836 | 0.236003731 | 0.311174627 | 0.283676866 | -1 |
+| **Sample 9** | 0.070247222 | 0.097663194 | 0.129397222 | 0.159320833 | 0.171659722 | 0.17494375 | 0.183878472 | 0.192720833 | 0.193045833 | 0.276390278 | 0.256345833 | 0.249488889 | -1 |
+| **Sample 10** | 0.060408333 | 0.085986806 | 0.121355556 | 0.154906944 | 0.168461111 | 0.1728375 | 0.182507639 | 0.191263889 | 0.192247222 | 0.282597917 | 0.263926389 | 0.249488889 | -1 |
+
+
+
+- The **bands** from **SENTINEL-2** include: `B1`, `B2`, `B3`, `B4`, `B5`, `B6`, `B11`, `B12`, etc.
+- The **SENTINEL-1** data includes polarization bands such as `VV` and `VH`, with additional derived features such as `VV_1` and `VH_1`.
+- Each row represents a specific point in time for the satellite’s data, with `1_VV` marking the timestamp of the observation.
+
+
+---
+
+
 ## Pipeline Steps
 
 ### 1. Data Standardization
