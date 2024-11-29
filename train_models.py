@@ -53,6 +53,12 @@ def train_models(x_data : dict,
         - Suppresses warnings related to model convergence (e.g., ConvergenceWarning).
     """
     
+
+    if not os.path.exists(path):
+        os.makedirs(path)
+        print(f"Created directory: {path}")
+
+        
     # Retrieve the list of models and their hyperparameter configurations
     details_models = get_details_models()
 
