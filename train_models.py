@@ -75,7 +75,7 @@ def train_models(x_data : dict,
             method = f"{name_section} - {name_subsection}"
             
             # Split the current subsection data into training and testing sets
-            X_train, X_test, y_train, y_test = train_test_split(data_subsection, y, test_size=0.2, random_state=42)
+            X_train, X_test, y_train, y_test = train_test_split(data_subsection, y, test_size=0.2, random_state=42, stratify=y)
 
             # Iterate through each model and its corresponding parameters
             for detail_model in details_models:
